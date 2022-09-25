@@ -35,6 +35,12 @@ return equipos
 
 }
 
+module.exports = {
+    equipoListar
+}
+
+
+
 const usuario = ()=>{
     usuarios =  [
         {
