@@ -1,4 +1,4 @@
-const equipo =()=>{
+const equipoListar =()=>{
     equipos = [
         {
             "id" : 1,
