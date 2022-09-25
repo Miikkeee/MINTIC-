@@ -16,22 +16,25 @@ app.get('/api/equipos/:id', (request,response) => {  //Muestra un equipo en espe
     const id = Number(request.params.id)
     const DB = require('./db')
     const equipo = DB.equipoListar().find(equipo => equipo.id == id)
-
-    if(equipo){
+   if(equipo){
         response.json(equipo)
     } else {
         response.status(404).end()
     }
 })
 
-app.delete('/api/equipos/:id', (request,response) => {
+app.delete('/api/equipos/:id', (request,response) => {  //Elimina un equipo en especifico
     const id = Number(request.params.id)
     const DB = require('./db')
+    
     const equipo = DB.equipoListar().filter(equipo => equipo.id != id)
-    response.status(204).end()
+    if(equipo){
+        response.json(equipo)
+        response.status(204).end()
+    } else {
+        response.status(404).end()
+    }
 })
-
-
 
 const puerto = 3000
 
