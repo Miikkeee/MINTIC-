@@ -49,7 +49,7 @@ const usuario = ()=>{
         }
     ]  
 
-
+return usuario
 
     
 }
@@ -58,8 +58,8 @@ const eventos = ()=>{
     evento = [
         {
             "id" : 1,
-            "ide1" : 1,
-            "ide2" : 2,
+            "ideequipo1" : 1,
+            "ideequipo2" : 2,
             "Fechaevento" : "1/5/2022",
             "Equipo1" : "Chelsea",
             "Equipo2" : "Liverpool",
@@ -69,8 +69,8 @@ const eventos = ()=>{
 
         {
             "id" : 2,
-            "ide1" : 3,
-            "ide2" : 2,
+            "ideequipo1" : 3,
+            "ideequipo2" : 2,
             "Fechaevento" : "3/7/2022",
             "Equipo1" : "Manchester United",
             "Equipo2" : "Liverpool",
