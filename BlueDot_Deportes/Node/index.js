@@ -98,7 +98,6 @@ app.put('/api/equipos/:id', (request, response) => {
         console.log("error")
         response.status(400).end()
     }
-
 })
 
 const puerto = 3000
