@@ -98,7 +98,6 @@ app.put('/api/equipos/:id', (request, response) => {
         console.log("error")
         response.status(400).end()
     }
-
 })
 
 app.put('/api/eventos/:id', (request, response) => {  //inserta evento 
