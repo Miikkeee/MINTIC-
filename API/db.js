@@ -35,10 +35,6 @@ return equipos
 
 }
 
-module.exports = {
-    equipoListar
-}
-
 
 
 const usuario = ()=>{
@@ -60,12 +56,12 @@ return usuario
     
 }
 
-const eventos = ()=>{
-    evento = [
+const evento = ()=>{
+    eventos = [
         {
             "id" : 1,
-            "ideequipo1" : 1,
-            "ideequipo2" : 2,
+            "ide1" : 1,
+            "ide2" : 2,
             "Fechaevento" : "1/5/2022",
             "Equipo1" : "Chelsea",
             "Equipo2" : "Liverpool",
@@ -75,8 +71,8 @@ const eventos = ()=>{
 
         {
             "id" : 2,
-            "ideequipo1" : 3,
-            "ideequipo2" : 2,
+            "ide1" : 3,
+            "ide2" : 2,
             "Fechaevento" : "3/7/2022",
             "Equipo1" : "Manchester United",
             "Equipo2" : "Liverpool",
@@ -85,4 +81,19 @@ const eventos = ()=>{
         }
     ]
 
+    return eventos
 }
+
+module.exports = {
+    equipoListar
+}
+
+module.exports = {
+usuario
+}
+
+module.exports = {
+    evento
+}
+
+
