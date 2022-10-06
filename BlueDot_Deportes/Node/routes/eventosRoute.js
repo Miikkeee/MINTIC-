@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const eventosCtrl = require('../controllers/eventoController')
 
-router.get('/', function(request,response){  //obtiene todos los eventos R
+router.get('/', function(request,response){  //obtiene todos los eventos 
     try {
         response.send(eventosCtrl.eventoListar())
         response.end()
@@ -12,11 +12,11 @@ router.get('/', function(request,response){  //obtiene todos los eventos R
     }
 })
 
-router.get('/:id', eventosCtrl.eventoObtener) //obtiene un solo eventoR
+router.get('/:id', eventosCtrl.eventoObtener) //obtiene un solo evento
 
 router.post('/', eventosCtrl.eventoGuardar )  //Guarda un evento
 
-router.put('/:id', eventosCtrl.eventoActualizar) // Actualiza un eventoR
+router.put('/:id', eventosCtrl.eventoActualizar) // Actualiza un evento
 
 router.delete('/:id', eventosCtrl.eventoEliminar) // Elimina un evento
 

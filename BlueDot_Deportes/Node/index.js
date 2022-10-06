@@ -26,7 +26,7 @@ app.use('/api/eventos', require('./routes/eventosRoute.js'))
 
 //ruta usuarios
 app.use('/api/user', require('./routes/userRoute.js'))
-//*--------------------------------------------------------------------
+
 
 const puerto = 3000
 
