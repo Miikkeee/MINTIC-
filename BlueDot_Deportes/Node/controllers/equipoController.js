@@ -1,60 +1,41 @@
+const { response } = require('express')
 const equipoModel = require('../models/equipScheme')
 
-const equipoListar = () => {
-    equipos = [
-        {
-            "id": 1,
-            "Deporte": "Futbol",
-            "Nequipo": "Chelsea"
+const equipoListar = async (request,response) => {  //Enlista los equipos CONECTADO
 
-        },
-        {
-            "id": 2,
-            "Deporte": "Futbol",
-            "Nequipo": "Liverpool"
+    try{
+        const equipos = await equipoModel.find()
+        response.status(200).send(equipos)
+        return equipos
+    }catch(error){
+        console.log(error)
+    }
 
-        },
-        {
-            "id": 3,
-            "Deporte": "Futbol",
-            "Nequipo": "Manchester United"
-
-        },
-
-        {
-            "id": 4,
-            "Deporte": "Basquetball",
-            "Nequipo": "Lakers"
-
-        }
-
-
-    ]
-    return equipos
 }
 
-const equipoGuardar = async (request, response) => { //Guardar un equipo
+const equipoGuardar = async (request, response) => { //Guardar un equipo CONECTADO
     try {
         const equipo = request.body
-        const ids = equipoListar().map(equipo => equipo.id)
-        const maxId = Math.max(...ids)
         if (equipo.Nequipo == '' || equipo.Deporte == '') {
             response.status(400).end()
         } else {
             try {
+                const equipos = await equipoModel.find()
                 const modelEquipo = new equipoModel(request.body)
+                const ids = equipos.map(equipo => equipo.id)
+                const maxId = Math.max(...ids)
+                if(maxId != -Infinity){
+                    modelEquipo.id = maxId + 1
+                }else{
+                    console.log(maxId)
+                    modelEquipo.id = 0
+                }
                 modelEquipo.save()
+                response.send("Guardado con exito").end()
             }catch(error){
                 console.log("error en el guardado de equipo" + error)
             }
-            const newEquipo = {
-                id: maxId + 1,
-                Deporte: equipo.Deporte,
-                Nequipo: equipo.Nequipo
-            }
-            equipoListar().push(newEquipo)
-            response.status(200).json(newEquipo).end()
-            console.log("guardado")
+            console.log("Equipo guardado")
         }
 
     } catch (error) {
@@ -63,16 +44,38 @@ const equipoGuardar = async (request, response) => { //Guardar un equipo
     }
 }
 
-const equipoObtener = async (request, response) => { //Obtiene un equipo
+const equipoObtener = async (request, response) => { //Obtiene un equipo CONECTADO
     try {
         const id = Number(request.params.id)
-        const equipo = equipoListar().find(equipo => equipo.id == id)
-        if (equipo) {
-            response.json(equipo)
-            console.log("Equipo obtenido")
-        } else {
-            response.status(404).end()
+        if(id == ''){
+            response.status(400).send("Error buscando el equipo").end()
+        }else{
+            console.log("get id " + id)
+            const rta = await equipoModel.findOne({id: id})
+            //console.log(rta)
+            console.log("Equipo encontrado")
+            response.status(200).send(rta)
         }
+    } catch (error) {
+        console.log("error")
+        response.status(400).end()
+    }
+
+}
+
+const equipoActualizar = async (request, response) => { //Actualiza un equipo CONECTADO
+    try {
+        const { id, Deporte , Nequipo } = request.body
+        const equipo = {}
+        equipo.Deporte = Deporte
+        equipo.Nequipo = Nequipo
+        const rta = await  equipoModel.updateOne(
+            {id: id},
+            {$set: equipo},
+            {new: true}
+        )
+        response.send("actualizao").end()
+        console.log("actualizao")
     } catch (error) {
         console.log("error" + error)
         response.status(400).end()
@@ -80,39 +83,17 @@ const equipoObtener = async (request, response) => { //Obtiene un equipo
 
 }
 
-const equipoActualizar = async (request, response) => { //Actualiza un equipo
+const equipoEliminar = async (request, response) => {   //Elimina un equipo CONECTADO
     try {
         const id = Number(request.params.id)
-        const equipoPut = request.body
-        const equipo = equipoListar().find(equipo => equipo.id == id)
-        if (equipo) {
-            const newEquipo = {
-                id: equipo.id,
-                Deporte: equipoPut.Deporte,
-                Nequipo: equipoPut.Nequipo
-            }
-            response.json(newEquipo)
-            console.log("Equipo actualizado")
-        } else {
-            response.status(404).end()
-        }
-    } catch (error) {
-        console.log("error" + error)
-        response.status(400).end()
-    }
-
-}
-
-const equipoEliminar = async (request, response) => {
-    try {
-        const id = Number(request.params.id)
-        const equipo = equipoListar().filter(equipo => equipo.id != id)
-        if (equipo) {
-            response.json(equipo)
-            response.status(204).end()
+        if(id == ''){
+            response.status(400).send("Error eliminando el equipo").end()
+        }else{
+            console.log("del id " + id)
+            const rta = await equipoModel.deleteOne({id: id})
+            console.log(rta)
             console.log("Equipo eliminado")
-        } else {
-            response.status(404).end()
+            response.status(200).send("Categoria eliminada exitosamente.")
         }
     } catch (error) {
         console.log("error")
