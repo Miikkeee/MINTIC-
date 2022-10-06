@@ -1,5 +1,6 @@
 const { response, json } = require('express')
 const express = require('express')
+const db = require('./config/db')
 const app = express()
 
 app.use(express.json())
@@ -34,3 +35,4 @@ app.listen(puerto, () => {
     console.log("servidor activo, puerto: " + puerto)
 })
 
+db()

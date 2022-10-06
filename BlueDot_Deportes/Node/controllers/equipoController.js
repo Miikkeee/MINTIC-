@@ -1,3 +1,5 @@
+const equipoModel = require('../models/equipScheme')
+
 const equipoListar = () => {
     equipos = [
         {
@@ -36,44 +38,54 @@ const equipoGuardar = async (request, response) => { //Guardar un equipo
         const equipo = request.body
         const ids = equipoListar().map(equipo => equipo.id)
         const maxId = Math.max(...ids)
-
-        const newEquipo = {
-            id: maxId + 1,
-            Deporte: equipo.Deporte,
-            Nequipo: equipo.Nequipo
+        if (equipo.Nequipo == '' || equipo.Deporte == '') {
+            response.status(400).end()
+        } else {
+            try {
+                const modelEquipo = new equipoModel(request.body)
+                modelEquipo.save()
+            }catch(error){
+                console.log("error en el guardado de equipo" + error)
+            }
+            const newEquipo = {
+                id: maxId + 1,
+                Deporte: equipo.Deporte,
+                Nequipo: equipo.Nequipo
+            }
+            equipoListar().push(newEquipo)
+            response.status(200).json(newEquipo).end()
+            console.log("guardado")
         }
-        equipoListar().push(newEquipo)
-        response.status(200).json(newEquipo).end()
-        console.log("guardado")
-    }catch(error){
+
+    } catch (error) {
         console.log("error")
         response.status(400).end()
     }
 }
 
-const equipoObtener = async (request,response) => { //Obtiene un equipo
-    try{
-    const id = Number(request.params.id)
-    const equipo = equipoListar().find(equipo => equipo.id == id)
-    if(equipo){
-        response.json(equipo)
-        console.log("Equipo obtenido")
-    }else{
-        response.status(404).end()
-    }
-    }catch(error){
+const equipoObtener = async (request, response) => { //Obtiene un equipo
+    try {
+        const id = Number(request.params.id)
+        const equipo = equipoListar().find(equipo => equipo.id == id)
+        if (equipo) {
+            response.json(equipo)
+            console.log("Equipo obtenido")
+        } else {
+            response.status(404).end()
+        }
+    } catch (error) {
         console.log("error" + error)
         response.status(400).end()
     }
 
 }
 
-const equipoActualizar = async (request,response) => { //Actualiza un equipo
-    try{
+const equipoActualizar = async (request, response) => { //Actualiza un equipo
+    try {
         const id = Number(request.params.id)
         const equipoPut = request.body
         const equipo = equipoListar().find(equipo => equipo.id == id)
-        if(equipo){
+        if (equipo) {
             const newEquipo = {
                 id: equipo.id,
                 Deporte: equipoPut.Deporte,
@@ -81,18 +93,18 @@ const equipoActualizar = async (request,response) => { //Actualiza un equipo
             }
             response.json(newEquipo)
             console.log("Equipo actualizado")
-        }else{
+        } else {
             response.status(404).end()
         }
-        }catch(error){
-            console.log("error" + error)
-            response.status(400).end()
-        }
-        
+    } catch (error) {
+        console.log("error" + error)
+        response.status(400).end()
+    }
+
 }
 
 const equipoEliminar = async (request, response) => {
-    try{
+    try {
         const id = Number(request.params.id)
         const equipo = equipoListar().filter(equipo => equipo.id != id)
         if (equipo) {
@@ -102,7 +114,7 @@ const equipoEliminar = async (request, response) => {
         } else {
             response.status(404).end()
         }
-    }catch(error){
+    } catch (error) {
         console.log("error")
         response.status(400).end()
     }
