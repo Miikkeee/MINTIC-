@@ -19,4 +19,6 @@ const equipoSchema = mongoose.Schema(
         }
     }
 )
+
+
 module.exports = mongoose.model("equipo", equipoSchema)
