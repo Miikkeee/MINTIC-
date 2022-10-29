@@ -11,7 +11,7 @@ export function ListaEventos(){
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.log("error " + error))
-    return <div>
+    return <div className='col-sm-6 offset-3'>
         <Evento/>
     </div>
 }
