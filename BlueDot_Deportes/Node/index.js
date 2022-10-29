@@ -29,7 +29,7 @@ app.use('/api/eventos', require('./routes/eventosRoute.js'))
 app.use('/api/user', require('./routes/userRoute.js'))
 
 
-const puerto = 3000
+const puerto = 3001
 
 app.listen(puerto, () => {
     console.log("servidor activo, puerto: " + puerto)

@@ -57,8 +57,10 @@ const eventoGuardar = async (request, response) => { //Guardar un evento R
 const eventoObtener = async (request,response) => { //Obtiene un evento R
     try {
         const id = Number(request.params.id)
+        console.log(id)
+        
         if(id == ''){
-            response.status(400).send("Error buscando el equipo").end()
+            response.status(400).send("Error buscando el evento").end()
         }else{
             console.log("get id " + id)
             const rta = await eventModel.findOne({id: id})

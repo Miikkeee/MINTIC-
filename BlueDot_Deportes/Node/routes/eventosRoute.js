@@ -8,7 +8,7 @@ router.get('/:id', eventosCtrl.eventoObtener) //obtiene un solo evento
 
 router.post('/', eventosCtrl.eventoGuardar )  //Guarda un evento
 
-router.put('/', eventosCtrl.eventoActualizar) // Actualiza un evento
+router.put('/:id', eventosCtrl.eventoActualizar) // Actualiza un evento
 
 router.delete('/:id', eventosCtrl.eventoEliminar) // Elimina un evento
 
