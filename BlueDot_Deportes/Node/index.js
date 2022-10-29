@@ -2,9 +2,10 @@ const { response, json } = require('express')
 const express = require('express')
 const db = require('./config/db')
 const app = express()
+const cors = require('cors')
 
 app.use(express.json())
-
+app.use(cors())
 app.get('/', function(request, response){
     try {
         response.send('<h1>Hola mundo</h1>')
