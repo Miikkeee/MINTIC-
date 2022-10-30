@@ -30,10 +30,10 @@ app.use('/api/eventos', require('./routes/eventosRoute.js'))
 app.use('/api/user', require('./routes/userRoute.js'))
 
 
-const puerto = 3001
 
-app.listen(puerto, () => {
-    console.log("servidor activo, puerto: " + puerto)
+
+app.listen(process.env.PORT || 5000, () => {
+    console.log("servidor activo, puerto: " + process.env.PORT)
 })
 
 db()

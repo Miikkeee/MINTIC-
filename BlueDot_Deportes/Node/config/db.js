@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const URIDB = 'mongodb://localhost:27017/MINTIC'
+const URIDB = 'mongodb+srv://dbUser:sergio@cluster0.ewj3omq.mongodb.net/MINTIC'
 
 module.exports = () => {
     const conn = () =>{
