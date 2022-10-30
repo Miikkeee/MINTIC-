@@ -13,7 +13,7 @@ const userCtrl = require('../controllers/userController')
 //})
 
 router.post('/', userCtrl.userGuardar )  //Guarda un usuario
-
+router.post('/login', userCtrl.userLogin)
 
 
 

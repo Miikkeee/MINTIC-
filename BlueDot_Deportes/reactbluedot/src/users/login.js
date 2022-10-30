@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function Login(){
 
     return <div class = "container-fluid">
@@ -19,9 +21,10 @@ export function Login(){
                         <input type="password" class="form-control" id="exampleInputPassword1"></input>
                     </div>                 
                     <div class ="form-group my-4">
-                        <button type="button" class="btn btn-primary" onClick={function(){ console.log('hi')}}>
+                        <Link to ="/tablero" class="btn btn-primary">
                             Acceder
-                        </button>
+                            </Link>
+                    
                     </div>
                     
                 </form>            
