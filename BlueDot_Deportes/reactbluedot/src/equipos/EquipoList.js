@@ -39,7 +39,7 @@ export function EquipoList() {
                         <tr>
                             <td>{dato.Nequipo}</td>
                             <td>{dato.Deporte}</td>
-                            <td><Link to={`/tablero/equipoEdit/${dato._id}`}>Editar</Link></td>
+                            <td><Link to={`/tablero/equipoEdit/${dato.id}`}>Editar</Link></td>
                         </tr>
                     ))
                 }
